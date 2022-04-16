@@ -10,8 +10,11 @@ services:
     volumes:
       - ../:/go/src/${APP_NAME}
       - gopkg:/go/pkg/
+      - gobin:/go/bin/
     command: ['tail', '-f', '/dev/null']
 
 volumes:
   gopkg:
     name: ${APP_NAME}-gopkg
+  gobin:
+    name: ${APP_NAME}-gobin
