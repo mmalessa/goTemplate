@@ -2,13 +2,9 @@ APP_NAME = gotemplate
 BASE_GO_IMAGE = golang:1.17.6-alpine3.15
 BASE_TARGET_IMAGE = alpine:3.15
 
-REGISTRY ?= localhost:5000
-IMAGE_DEV = $(REGISTRY)/$(APP_NAME)-dev
-IMAGE_PROD = $(REGISTRY)/$(APP_NAME)-application
-
+IMAGE_DEV = $(APP_NAME)-dev
 
 DOCKERFILE_DEV = .docker/dev/Dockerfile
-DOCKERFILE_PROD = ./Dockerfile
 
 
 CGO_ENABLED = 0 # statically linked = 0
@@ -33,9 +29,9 @@ ARG := $(word 2, $(MAKECMDGOALS))
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-build: build-image-dev ## Alias for 'build-image-dev'
+build: build-image ## Alias for 'build-image'
 
-build-image-dev: ## Build dev image
+build-image: ## Build dev image
 	@docker build 											\
 	    -t $(IMAGE_DEV)										\
 		--build-arg BASE_GO_IMAGE=$(BASE_GO_IMAGE)			\
@@ -43,22 +39,6 @@ build-image-dev: ## Build dev image
 		--build-arg APP_NAME=$(APP_NAME)					\
 		-f $(DOCKERFILE_DEV)								\
 		.
-
-build-image-prod: ## Build prod image
-	@docker build 											\
-	    -t $(IMAGE_PROD)									\
-		--build-arg BASE_GO_IMAGE=$(BASE_GO_IMAGE)			\
-		--build-arg BASE_TARGET_IMAGE=$(BASE_TARGET_IMAGE)	\
-		--build-arg CGO_ENABLED=${CGO_ENABLED}				\
-		--build-arg TARGETOS=${TARGETOS}					\
-		--build-arg TARGETARCH=${TARGETARCH}				\
-		--build-arg APP_NAME=${APP_NAME}					\
-		-f $(DOCKERFILE_PROD)								\
-		.
-
-run-image: ## Run prod image
-	@docker run $(IMAGE_PROD)
-
 up: ## Start application dev container
 	@cd .docker && \
 	COMPOSE_PROJECT_NAME=$(APP_NAME) \

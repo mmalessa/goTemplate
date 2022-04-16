@@ -9,4 +9,9 @@ services:
       - APP_ENV=development
     volumes:
       - ../:/go/src/${APP_NAME}
+      - gopkg:/go/pkg/
     command: ['tail', '-f', '/dev/null']
+
+volumes:
+  gopkg:
+    name: ${APP_NAME}-gopkg

@@ -12,6 +12,9 @@ RUN apk add --no-cache bash git openssh autoconf automake libtool gettext gettex
 # RUN ./configure
 # RUN make && make install
 
+RUN   mkdir /go/pkg
+RUN   chmod a+rwx /go/pkg
+
 ARG DEVELOPER_UID
 RUN adduser -s /bin/sh -u ${DEVELOPER_UID} -D developer
 USER developer
