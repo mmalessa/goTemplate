@@ -12,9 +12,15 @@ services:
       - gopkg:/go/pkg/
       - gobin:/go/bin/
     command: ['tail', '-f', '/dev/null']
+    networks:
+      application:
 
 volumes:
   gopkg:
     name: ${APP_NAME}-gopkg
   gobin:
     name: ${APP_NAME}-gobin
+
+networks:
+  application:
+    name: ${APP_NAME}-network
