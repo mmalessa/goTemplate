@@ -17,8 +17,8 @@ A template of the dockerized development environment for apps in Go.
 
 
 ### Visual Studio Code
-4. Install (Ctrl + Shift + X): 
+1. On left bottom corner click `><` icon and select `Attach to running container...` and select container `$(APP_NAME)`
+2. Install (Ctrl + Shift + X): 
     - Remote - Containers (Microsoft)
     - Go (Go Team at Google)
-5. Run command (Ctrl + Shift + P) `Go: Install/Update tools`, select all and click `OK`
-6. On left bottom corner click `><` icon and select `Attach to running container...` and select container `$(APP_NAME)`
+3. Run command (Ctrl + Shift + P) `Go: Install/Update tools`, select all and click `OK`
