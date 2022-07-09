@@ -1,4 +1,6 @@
 APP_NAME = gotemplate
+APP_HOME = github.com/githubuser/$(APP_NAME)
+
 BASE_GO_IMAGE = golang:1.17.6-alpine3.15
 BASE_TARGET_IMAGE = alpine:3.15
 
@@ -36,7 +38,7 @@ build-image: ## Build dev image
 	    -t $(IMAGE_DEV)										\
 		--build-arg BASE_GO_IMAGE=$(BASE_GO_IMAGE)			\
 		--build-arg DEVELOPER_UID=$(DEVELOPER_UID)			\
-		--build-arg APP_NAME=$(APP_NAME)					\
+		--build-arg APP_HOME=$(APP_HOME)					\
 		-f $(DOCKERFILE_DEV)								\
 		.
 up: ## Start application dev container
@@ -44,6 +46,7 @@ up: ## Start application dev container
 	COMPOSE_PROJECT_NAME=$(APP_NAME) \
 	IMAGE_DEV=$(IMAGE_DEV) \
 	APP_NAME=$(APP_NAME) \
+	APP_HOME=$(APP_HOME) \
 	docker-compose up -d
 
 down: ## Remove application dev container
@@ -51,6 +54,7 @@ down: ## Remove application dev container
 	COMPOSE_PROJECT_NAME=$(APP_NAME) \
 	IMAGE_DEV=$(IMAGE_DEV) \
 	APP_NAME=$(APP_NAME) \
+	APP_HOME=$(APP_HOME) \
 	docker-compose down
 
 console: ## Enter application dev container

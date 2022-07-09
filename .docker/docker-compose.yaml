@@ -4,11 +4,11 @@ services:
     image: ${IMAGE_DEV}
     container_name: ${APP_NAME}-dev
     restart: on-failure
-    working_dir: /go/src/${APP_NAME}
+    working_dir: /go/src/${APP_HOME}
     environment:
       - APP_ENV=development
     volumes:
-      - ../:/go/src/${APP_NAME}
+      - ../:/go/src/${APP_HOME}
       - gopkg:/go/pkg/
       - gobin:/go/bin/
     command: ['tail', '-f', '/dev/null']

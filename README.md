@@ -2,7 +2,7 @@
 A template of the dockerized development environment for apps in Go.
 
 ## Kickstart
-1. Change `APP_NAME` in `Makefile`
+1. In `Makefile` change `APP_NAME` _(part of image and container name)_ && `APP_HOME` _(app home directory, subdirectory of `/go/src/`)_
 2. `make build`
 3. `make up`
 

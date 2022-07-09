@@ -11,5 +11,5 @@ ARG DEVELOPER_UID
 RUN adduser -s /bin/sh -u ${DEVELOPER_UID} -D developer
 USER developer
 
-ARG APP_NAME
-WORKDIR /go/src/${APP_NAME}
+ARG APP_HOME
+WORKDIR /go/src/${APP_HOME}
